@@ -1,0 +1,22 @@
+name: download Youtube video
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 */1 * * *'
+
+jobs:
+  run_main:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ 3.11 ]
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: install requirement
+        run: pip3 install -r requirements.txt
+      - name: run script
+        run: python3 ./main.py
